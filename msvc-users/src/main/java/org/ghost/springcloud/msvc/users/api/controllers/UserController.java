@@ -48,11 +48,12 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody User user, BindingResult result) {
+        
         if (result.hasErrors()) {
             return validar(result);
         }
 
-        if(this.service.findByEmail(user.getEmail()).isPresent()) {
+        if(this.service.existsByEmail(user.getEmail())) {
             return ResponseEntity.badRequest().body(Collections.singletonMap("Message", "The email is already in use"));
         }
 

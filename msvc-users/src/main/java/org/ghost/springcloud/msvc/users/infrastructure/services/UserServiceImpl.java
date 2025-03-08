@@ -42,7 +42,15 @@ public class UserServiceImpl implements IUserService{
 
     @Override
     public Optional<User> findByEmail(String email) {
-        return this.repository.findByEmail(email);
+        // Optional<User> user = this.repository.findByEmail(email);
+        Optional<User> user = this.repository.findUserEmail(email);
+        return user;
     }
+
+    @Override
+    public boolean existsByEmail(String email) {
+       return this.repository.existsByEmail(email);
+    }
+    
     
 }

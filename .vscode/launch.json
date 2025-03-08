@@ -1,0 +1,25 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-MsvcCoursesApplication<msvc-courses>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "org.ghost.sprintcloud.msvc_courses.MsvcCoursesApplication",
+      "projectName": "msvc-courses",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env",
+      "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=35101 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=msvc-courses"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-MsvcUsersApplication<msvc-users>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "org.ghost.springcloud.msvc.users.MsvcUsersApplication",
+      "projectName": "msvc-users",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
