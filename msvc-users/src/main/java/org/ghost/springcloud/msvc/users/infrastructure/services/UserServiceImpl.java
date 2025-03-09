@@ -41,6 +41,7 @@ public class UserServiceImpl implements IUserService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<User> findByEmail(String email) {
         // Optional<User> user = this.repository.findByEmail(email);
         Optional<User> user = this.repository.findUserEmail(email);
@@ -48,9 +49,15 @@ public class UserServiceImpl implements IUserService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean existsByEmail(String email) {
        return this.repository.existsByEmail(email);
     }
-    
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<User> findAllByIds(Iterable<Long> ids) {
+        return (List<User>) this.repository.findAllById(ids);
+    }
     
 }

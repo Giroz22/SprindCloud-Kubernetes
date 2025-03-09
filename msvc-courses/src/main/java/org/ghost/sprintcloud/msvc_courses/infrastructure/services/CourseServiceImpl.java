@@ -2,6 +2,7 @@ package org.ghost.sprintcloud.msvc_courses.infrastructure.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.ghost.sprintcloud.msvc_courses.api.clients.UserClientRest;
 import org.ghost.sprintcloud.msvc_courses.domain.entities.Course;
@@ -97,6 +98,29 @@ public class CourseServiceImpl implements ICourseService{
             course.removeCourseUser(courseUser);
             repository.save(course);
             return Optional.of(userMsvc);
+        }
+
+        return Optional.empty();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Course> getCourseWithUsers(Long courseId) {
+        Optional<Course> courseOptional = this.repository.findById(courseId);
+        if(courseOptional.isPresent()) {
+            Course course = courseOptional.get();
+
+            if(!course.getCourseUsers().isEmpty()){
+                List<Long> ids = course.getCourseUsers().stream()
+                .map(cu -> cu.getUserId())
+                .collect(Collectors.toList());
+
+                List<User> users = this.client.getUsersByIds(ids);
+                course.setUsers(users);
+
+            }
+
+            return Optional.of(course);
         }
 
         return Optional.empty();
