@@ -3,6 +3,7 @@ package org.ghost.springcloud.msvc.users.infrastructure.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.ghost.springcloud.msvc.users.api.client.CourseClientRest;
 import org.ghost.springcloud.msvc.users.domain.entities.User;
 import org.ghost.springcloud.msvc.users.domain.repositories.UserRepository;
 import org.ghost.springcloud.msvc.users.infrastructure.abstract_services.IUserService;
@@ -15,6 +16,9 @@ public class UserServiceImpl implements IUserService{
 
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private CourseClientRest client;
 
     @Override
     @Transactional(readOnly = true)
@@ -38,6 +42,7 @@ public class UserServiceImpl implements IUserService{
     @Transactional
     public void deleteById(Long id) {
         this.repository.deleteById(id);
+        this.client.deleteCourseUserById(id);
     }
 
     @Override

@@ -12,7 +12,8 @@ public interface ICourseService {
     Optional<Course> getCourseWithUsers(Long courseId);
     Course save(Course course);
     void delete(Long id);
-    
+    void deleteCourseUserById(Long id);
+
     Optional<User> setUsuario(User user, Long courseId);
     Optional<User> createUser(User user, Long courseId);
     Optional<User> deleteUser(User user, Long courseId);

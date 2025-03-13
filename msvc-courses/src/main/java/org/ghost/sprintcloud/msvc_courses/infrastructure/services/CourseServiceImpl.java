@@ -104,6 +104,12 @@ public class CourseServiceImpl implements ICourseService{
     }
 
     @Override
+    @Transactional
+    public void deleteCourseUserById(Long id) {
+        this.repository.deleteCourseUserById(id);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Optional<Course> getCourseWithUsers(Long courseId) {
         Optional<Course> courseOptional = this.repository.findById(courseId);
@@ -125,5 +131,7 @@ public class CourseServiceImpl implements ICourseService{
 
         return Optional.empty();
     }
+
+    
     
 }
