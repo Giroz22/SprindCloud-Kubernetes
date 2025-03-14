@@ -15,13 +15,9 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "courses")
-@Getter
-@Setter
 public class Course {
 
     Course() {
@@ -50,4 +46,37 @@ public class Course {
     public void removeCourseUser(CourseUser courseUser) {
         this.courseUsers.remove(courseUser);
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<CourseUser> getCourseUsers() {
+        return courseUsers;
+    }
+
+    public void setCourseUsers(List<CourseUser> courseUsers) {
+        this.courseUsers = courseUsers;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+    
 }

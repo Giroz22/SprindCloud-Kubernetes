@@ -6,17 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = "course_user")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class CourseUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,4 +28,30 @@ public class CourseUser {
         CourseUser courseUser = (CourseUser) obj;
         return this.userId != null && this.userId.equals(courseUser.userId);
     }
+
+    public CourseUser() {
+    }
+
+    public CourseUser(Long id, Long userId) {
+        this.id = id;
+        this.userId = userId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    
 }
