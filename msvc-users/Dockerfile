@@ -18,14 +18,15 @@ RUN ./mvnw clean package -Dmaven.test.skip -Dmaven.main.skip -Dspring-boot.repac
 
 COPY ./msvc-users/src ./src
 
-RUN ./mvnw clean package -DskipTest
+RUN ./mvnw clean package -DskipTests
 
 FROM openjdk:23-jdk
 
 WORKDIR /app
+RUN mkdir ./logs
 
 COPY --from=builder /app/msvc-users/target/msvc-users-0.0.1-SNAPSHOT.jar .
 
 EXPOSE 8001
 
-ENTRYPOINT [ "java", "-jar", "msvc-users-0.0.1-SNAPSHOT.jar" ]
+CMD [ "java", "-jar", "msvc-users-0.0.1-SNAPSHOT.jar" ]

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "msvc-users", url = "localhost:8001")
+@FeignClient(name = "msvc-users", url = "msvc-users:8001")
 public interface UserClientRest {
     @GetMapping("/{id}")
     User getUser(@PathVariable Long id);
