@@ -1,22 +1,24 @@
 FROM openjdk:23-jdk AS builder
 
-WORKDIR /app/msvc-users
+ARG MSVC_NAME=msvc-users
+
+WORKDIR /app/$MSVC_NAME
 
 COPY ./pom.xml /app
 
 #Copia las Dependencias
-COPY ./msvc-users/.mvn ./.mvn 
+COPY ./$MSVC_NAME/.mvn ./.mvn 
 
 #Copia el wrapper de maven
-COPY ./msvc-users/mvnw .
+COPY ./$MSVC_NAME/mvnw .
 
 #Copia el pom de users
-COPY ./msvc-users/pom.xml .
+COPY ./$MSVC_NAME/pom.xml .
 
 RUN ./mvnw clean package -Dmaven.test.skip -Dmaven.main.skip -Dspring-boot.repackage.skip && rm -r ./target/
 # RUN ./mvnw dependency:go-offline
 
-COPY ./msvc-users/src ./src
+COPY ./$MSVC_NAME/src ./src
 
 RUN ./mvnw clean package -DskipTests
 
@@ -27,6 +29,9 @@ RUN mkdir ./logs
 
 COPY --from=builder /app/msvc-users/target/msvc-users-0.0.1-SNAPSHOT.jar .
 
-EXPOSE 8001
+ARG PORT_APP=8001
+ENV PORT=$PORT_APP
+
+EXPOSE $PORT
 
 CMD [ "java", "-jar", "msvc-users-0.0.1-SNAPSHOT.jar" ]
